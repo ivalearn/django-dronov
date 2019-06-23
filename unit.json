@@ -1,0 +1,16 @@
+{
+  "listeners": {
+    "0.0.0.0:8888": {
+      "pass": "applications/django_test"
+    }
+  },
+  "applications": {
+    "django_test": {
+      "type": "python 3.6",
+      "path": "/home/vanko/django/",
+      "home": "/home/vanko/.local/share/virtualenvs/django-kohRHzWU/",
+      "module": "tutorial.wsgi",
+      "user": "vanko"
+    }
+  }
+}
