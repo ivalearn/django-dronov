@@ -1,8 +1,8 @@
 from django.urls import path
-from . import views
+from .views import GoodListView, GoodDetailView
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<int:cat_id>/', views.index, name='index'),
-    path('good/<int:good_id>/', views.good, name='good'),
+    path('', GoodListView.as_view(), name='index'),
+    path('<int:cat_id>/', GoodListView.as_view(), name='index'),
+    path('good/<int:good_id>/', GoodDetailView.as_view(), name='good'),
 ]
