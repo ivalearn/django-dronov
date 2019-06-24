@@ -59,7 +59,9 @@ ROOT_URLCONF = 'tutorial.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            Path(BASE_DIR) / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +126,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/tmp/django_test'
+STATICFILES_DIRS = [
+    Path(BASE_DIR) / 'static'
+]
