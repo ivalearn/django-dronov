@@ -1,0 +1,75 @@
+head,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    text-align: center;
+    border-bottom: 1px #ccc solid;
+}
+
+#header h1 {
+    margin: 20px 0;
+    letter-spacing: 0.2em;
+}
+
+#leftmenu {
+    float: left;
+    width: 100px;
+    padding: 10px;
+}
+
+#leftmenu ul {
+    margin: 0;
+    padding: 0;
+}
+
+#leftmenu li {
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+#main {
+    margin-left: 110px;
+    border-left: 1px #ccc solid;
+    padding: 10px;
+}
+
+#main h2 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+#main table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#main td, #main th {
+    border: 1px #666 solid;
+    padding: 5px;
+}
+
+#main .centered {
+    text-align: center;
+}
+
+#main .category {
+    font-weight: bold;
+}
+
+#main .not-in-stock {
+    color: #f00;
+}
+
+#footer {
+    text-align: right;
+    border-top: 1px #ccc solid;
+    padding-right: 10px;
+}
+
+#footer p {
+    font-size: smaller;
+    font-style: italic;
+}
