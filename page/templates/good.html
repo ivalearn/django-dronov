@@ -5,5 +5,5 @@
         <p class="category">Категория: {{ good.category.name }}</p>
         <p>{{ good.description |linebreaksbr }}</p>
         <p class="not-in-stock">{% if not good.in_stock %}Нет в наличии!{% endif %}</p>
-        <p><a href="/goods/{{ good.category.id }}/">На Зад!</a></p>
+        <p><a href="/goods/{{ good.category.id }}/?page={{ cat_page }}">На Зад!</a></p>
 {% endblock %}

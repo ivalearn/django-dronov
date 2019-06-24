@@ -1,17 +1,41 @@
 {% extends 'base.html' %}
 {% block title %}{{ category.name }}{% endblock %}
 {% block main %}
-        <h2>{{ category.name }}</h2>
-        <table>
-            <tr>
-                <th>Название</th>
-                <th>Есть в наличии</th>
-            </tr>
-            {% for good in goods %}
-            <tr>
-                <td><a href="{% url 'good' good_id=good.id %}">{{ good.name }}</a></td>
-                <td>{% if good.in_stock %}+{% endif %}</td>
-            </tr>
+    <h2>{{ category.name }}</h2>
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Есть в наличии</th>
+        </tr>
+        {% for good in goods %}
+        <tr>
+            <td><a href="{% url 'good' good_id=good.id %}?cat_page={{ goods.number }}">{{ good.name }}</a></td>
+            <td>{% if good.in_stock %}+{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if goods.paginator.num_pages > 1 %}
+    <div id="pagination">
+        {% url 'index' cat_id=category.pk as cat_url %}
+        {% if goods.has_previous %}
+        <div id="previous-page">
+            <a href="{{ cat_url }}?page={{ goods.previous_page_number }}">&laquo;</a>
+        </div>
+        {% endif %}
+        {% if goods.has_next %}
+        <div id="next-page">
+                <a href="{% url 'index' cat_id=category.pk%}?page={{ goods.next_page_number }}">&raquo;</a>
+        </div>
+        {% endif %}
+        <div id="num-pages">
+            {% for pn in goods.paginator.page_range %}
+                {% if goods.number != pn %}
+                    <a class="page-ref" href="{{ cat_url }}?page={{ pn }}">{{ pn }}</a>
+                {% else %}
+                    <span class="page-ref">{{ pn }}</span>
+                {% endif %}
             {% endfor %}
-        </table>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}

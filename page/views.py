@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponse, Http404
 from .models import Category, Good
 from django.shortcuts import render
+from django.core.paginator import Paginator, InvalidPage
 
 
 def index(req: HttpRequest, cat_id: int = None) -> HttpResponse:
@@ -12,7 +13,13 @@ def index(req: HttpRequest, cat_id: int = None) -> HttpResponse:
             cat = Category.objects.get(pk=cat_id)
     except Category.DoesNotExist:
         raise Http404
-    goods = Good.objects.filter(category=cat)
+    page_no = req.GET.get('page')
+    all_goods = Good.objects.filter(category=cat)
+    paginator = Paginator(all_goods, 2)
+    try:
+        goods = paginator.page(page_no)
+    except InvalidPage:
+        goods = paginator.page(1)
     return render(req, 'index.html', {
         'category': cat,
         'cats': cats,
@@ -29,4 +36,5 @@ def good(req: HttpRequest, good_id: int) -> HttpResponse:
     return render(req, 'good.html', {
         'good': good,
         'cats': cats,
+        'cat_page': req.GET.get('cat_page', '1')
     })

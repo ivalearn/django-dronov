@@ -73,3 +73,34 @@ body {
     font-size: smaller;
     font-style: italic;
 }
+
+#pagination {
+    margin: 20px 0 0 0;
+}
+
+#pagination:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+#pagination #previous-page {
+    float: left;
+}
+
+#pagination #next-page {
+    float: right;
+}
+
+#pagination #num-pages {
+    text-align: center;
+}
+
+#num-pages .page-ref:not(:first-child) {
+    margin-left: .4em;
+}
+
+#num-pages .page-ref:not(:first-child)::before {
+    content: '|';
+    margin-right: .5em;
+}
