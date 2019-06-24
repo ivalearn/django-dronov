@@ -26,7 +26,10 @@ SECRET_KEY = '2r*=os=o9(9zwe#z54evwz)ae0_+0rau@pc)=+y$ri-==96h#1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.55.31','null.deex.fun']
+ALLOWED_HOSTS = [
+    '192.168.55.31',
+    'null.deex.fun',
+]
 
 
 # Application definition
