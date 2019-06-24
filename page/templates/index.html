@@ -7,29 +7,29 @@
             <th>Название</th>
             <th>Есть в наличии</th>
         </tr>
-        {% for good in goods %}
+        {% for good in object_list %}
         <tr>
-            <td><a href="{% url 'good' good_id=good.id %}?cat_page={{ goods.number }}">{{ good.name }}</a></td>
+            <td><a href="{% url 'good' good_id=good.id %}?cat_page={{ page_obj.number }}">{{ good.name }}</a></td>
             <td>{% if good.in_stock %}+{% endif %}</td>
         </tr>
         {% endfor %}
     </table>
-    {% if goods.paginator.num_pages > 1 %}
+    {% if paginator.num_pages > 1 %}
     <div id="pagination">
         {% url 'index' cat_id=category.pk as cat_url %}
-        {% if goods.has_previous %}
+        {% if page_obj.has_previous %}
         <div id="previous-page">
-            <a href="{{ cat_url }}?page={{ goods.previous_page_number }}">&laquo;</a>
+            <a href="{{ cat_url }}?page={{ page_obj.previous_page_number }}">&laquo;</a>
         </div>
         {% endif %}
-        {% if goods.has_next %}
+        {% if page_obj.has_next %}
         <div id="next-page">
-                <a href="{% url 'index' cat_id=category.pk%}?page={{ goods.next_page_number }}">&raquo;</a>
+                <a href="{% url 'index' cat_id=category.pk%}?page={{ page_obj.next_page_number }}">&raquo;</a>
         </div>
         {% endif %}
         <div id="num-pages">
-            {% for pn in goods.paginator.page_range %}
-                {% if goods.number != pn %}
+            {% for pn in paginator.page_range %}
+                {% if page_obj.number != pn %}
                     <a class="page-ref" href="{{ cat_url }}?page={{ pn }}">{{ pn }}</a>
                 {% else %}
                     <span class="page-ref">{{ pn }}</span>
