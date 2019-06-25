@@ -1,6 +1,6 @@
 from django.http import Http404
 from .models import Category, Good
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, DetailView
 
 
 class GoodListView(ListView):
@@ -24,15 +24,13 @@ class GoodListView(ListView):
         return context
 
 
-class GoodDetailView(TemplateView):
+class GoodDetailView(DetailView):
     template_name = 'good.html'
+    model = Good
+    pk_url_kwarg = 'good_id'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        try:
-            context['good'] = Good.objects.get(pk=self.kwargs['good_id'])
-        except Good.DoesNotExist:
-            raise Http404
         context['cats'] = Category.objects.all().order_by('name')
         context['cat_page'] = self.request.GET.get('cat_page', '1')
         return context

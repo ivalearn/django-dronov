@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}{{ good.name }} :: {{ good.category.name }}{% endblock %}
+{% block title %}{{ object.name }} :: {{ object.category.name }}{% endblock %}
 {% block main %}
-        <h2>{{ good.name }}</h2>
-        <p class="category">Категория: {{ good.category.name }}</p>
-        <p>{{ good.description |linebreaksbr }}</p>
-        <p class="not-in-stock">{% if not good.in_stock %}Нет в наличии!{% endif %}</p>
-        <p><a href="/goods/{{ good.category.id }}/?page={{ cat_page }}">На Зад!</a></p>
+        <h2>{{ object.name }}</h2>
+        <p class="category">Категория: {{ object.category.name }}</p>
+        <p>{{ object.description |linebreaksbr }}</p>
+        <p class="not-in-stock">{% if not object.in_stock %}Нет в наличии!{% endif %}</p>
+        <p><a href="/goods/{{ object.category.id }}/?page={{ cat_page }}">На Зад!</a></p>
 {% endblock %}
