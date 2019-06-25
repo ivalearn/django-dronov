@@ -1,9 +1,17 @@
 from django.http import Http404
 from .models import Category, Good
 from django.views.generic import ListView, DetailView
+from django.views.generic.base import ContextMixin
 
 
-class GoodListView(ListView):
+class CategoryListMixin(ContextMixin):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cats'] = Category.objects.all().order_by('name')
+        return context
+
+
+class GoodListView(ListView, ContextMixin):
     template_name = 'index.html'
     paginate_by = 2
 
@@ -19,18 +27,16 @@ class GoodListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cats'] = Category.objects.all().order_by('name')
         context['category'] = self._cat
         return context
 
 
-class GoodDetailView(DetailView):
+class GoodDetailView(DetailView, ContextMixin):
     template_name = 'good.html'
     model = Good
     pk_url_kwarg = 'good_id'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cats'] = Category.objects.all().order_by('name')
         context['cat_page'] = self.request.GET.get('cat_page', '1')
         return context
